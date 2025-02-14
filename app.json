@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "bbaegok",
-    "slug": "bbaegok",
+    "name": "app",
+    "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
-    "scheme": "bbaegok",
+    "scheme": "app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
