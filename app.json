@@ -18,8 +18,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/logofore.png",
+        "backgroundColor": "#EEEDEB"
       },
       "package": "bbaegok.app"
     },
