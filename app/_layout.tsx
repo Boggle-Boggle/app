@@ -24,7 +24,7 @@ export default function RootLayout() {
   useEffect(() => {
     const checkNetworkStatus = async () => {
       const { isConnected } = await Network.getNetworkStateAsync();
-      setIsNetworkAvailable(isConnected);
+      setIsNetworkAvailable(isConnected ?? false);
     };
 
     checkNetworkStatus();
@@ -40,10 +40,10 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && isNetworkAvailable) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [loaded, isNetworkAvailable]);
 
   if (!loaded) {
     return null;
@@ -59,7 +59,15 @@ export default function RootLayout() {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => isNetworkAvailable.fetch().then((state) => setIsNetworkAvailable(state.isConnected))}
+          onPress={async () => {
+            try {
+              const state = await Network.getNetworkStateAsync();
+              setIsNetworkAvailable(state.isConnected ?? false);
+            } catch (error) {
+              console.error('Error checking network status', error);
+              setIsNetworkAvailable(false);
+            }
+          }}
         >
           <Text style={styles.btnText}>재시도하기</Text>
         </TouchableOpacity>
