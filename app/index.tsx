@@ -1,10 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, Alert } from 'react-native';
+import { BackHandler, Alert, View, StatusBar } from 'react-native';
 import WebView from 'react-native-webview';
 
 export default function App() {
   const webViewRef = useRef<WebView>(null);
   const [canGoBack, setCanGoBack] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState<string>('#FFFFFF');
+  const getStatusColor = () => {
+    if (currentUrl.includes('login')) return '#CBBAB9';
+    if (currentUrl.includes('note')) return '#DCD7D6';
+    if (
+      currentUrl.includes('signup') ||
+      currentUrl.includes('nickname') ||
+      currentUrl.includes('terms') ||
+      currentUrl.includes('VersionInfo') ||
+      currentUrl.includes('deleteAccount')
+    )
+      return '#FFFFFF';
+
+    return '#EEEDEB';
+  };
 
   const handleBackPress = () => {
     if (!webViewRef.current) return;
@@ -28,13 +43,19 @@ export default function App() {
   }, [canGoBack]);
 
   return (
-    <WebView
-      ref={webViewRef}
-      userAgent='Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Mobile Safari/537.36'
-      source={{ uri: 'https://bbaegok.store' }}
-      style={{ flex: 1 }}
-      overScrollMode='never'
-      onNavigationStateChange={(navState) => setCanGoBack(navState.canGoBack)}
-    />
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor={getStatusColor()} barStyle='dark-content' />
+      <WebView
+        ref={webViewRef}
+        userAgent='Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Mobile Safari/537.36'
+        source={{ uri: 'https://bbaegok.store' }}
+        style={{ flex: 1 }}
+        overScrollMode='never'
+        onNavigationStateChange={(navState) => {
+          setCanGoBack(navState.canGoBack);
+          setCurrentUrl(navState.url);
+        }}
+      />
+    </View>
   );
 }
