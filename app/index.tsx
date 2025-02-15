@@ -11,10 +11,12 @@ export default function App() {
     if (currentUrl.includes('note')) return '#DCD7D6';
     if (
       currentUrl.includes('signup') ||
+      currentUrl.includes('signUp') ||
       currentUrl.includes('nickname') ||
       currentUrl.includes('terms') ||
       currentUrl.includes('VersionInfo') ||
-      currentUrl.includes('deleteAccount')
+      currentUrl.includes('deleteAccount') ||
+      currentUrl.includes('edit')
     )
       return '#FFFFFF';
 
