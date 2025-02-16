@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "app",
+    "name": "빼곡",
     "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
-    "scheme": "app",
+    "scheme": "빼곡",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
