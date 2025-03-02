@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "빼곡",
+    "name": "빼곡 - 빼곡하게 채우는 나만의 책장",
     "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
-    "scheme": "빼곡",
+    "scheme": "bbaegok",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -14,7 +14,12 @@
       "backgroundColor": "#EEEDEB"
     },
     "ios": {
-      "supportsTablet": true
+      "icon": "./assets/images/logo.png",
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bbaegok.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
