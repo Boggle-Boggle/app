@@ -27,9 +27,6 @@ export default function App() {
         return;
       }
     }
-
-    const token = await Notifications.getExpoPushTokenAsync();
-    console.log('푸시 토큰:', token);
   }
 
   useEffect(() => {
