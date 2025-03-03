@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "빼곡 - 빼곡하게 채우는 나만의 책장",
+    "name": "빼곡",
     "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/logoForIOS.png",
     "scheme": "bbaegok",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,11 +14,18 @@
       "backgroundColor": "#EEEDEB"
     },
     "ios": {
-      "icon": "./assets/images/logo.png",
+      "icon": {
+        "dark": "./assets/images/logoForIOS.png",
+        "light": "./assets/images/logoForIOS.png",
+        "tinted": "./assets/images/logoForIOS.png"
+      },
+      "appStoreIcon": "./assets/images/appStoreIcon.png",
       "supportsTablet": false,
       "bundleIdentifier": "com.bbaegok.app",
+      "buildNumber": "1.0.0",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPushNotificationsUsageDescription": "매주 읽은 책을 기록할 수 있도록 알림을 보내드립니다."
       }
     },
     "android": {
@@ -31,7 +38,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/logo.png"
+      "favicon": "./assets/images/logoForIOS.png"
     },
     "plugins": ["expo-router"],
     "experiments": {
