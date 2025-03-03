@@ -1,4 +1,5 @@
 import * as Notifications from 'expo-notifications';
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
 import { Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import WebView from 'react-native-webview';
@@ -83,22 +84,25 @@ export default function App() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={isKeyboardAvoidingPage()}>
       <TouchableWithoutFeedback onPressIn={dismissKeyboard}>
-        <WebView
-          ref={webViewRef}
-          source={{ uri: 'https://bbaegok.store' }}
-          style={[styles.webView]}
-          bounces={false}
-          scrollEnabled={!keyboardVisible}
-          hideKeyboardAccessoryView={true}
-          showsVerticalScrollIndicator={false}
-          overScrollMode='never'
-          contentInsetAdjustmentBehavior='never'
-          keyboardDisplayRequiresUserAction={true}
-          onNavigationStateChange={(event) => {
-            setCurrentUrl(event.url);
-          }}
-          allowsBackForwardNavigationGestures={canSwipe(currentUrl)}
-        />
+        <>
+          <StatusBar style='dark' />
+          <WebView
+            ref={webViewRef}
+            source={{ uri: 'https://bbaegok.store' }}
+            style={[styles.webView]}
+            bounces={false}
+            scrollEnabled={!keyboardVisible}
+            hideKeyboardAccessoryView={true}
+            showsVerticalScrollIndicator={false}
+            overScrollMode='never'
+            contentInsetAdjustmentBehavior='never'
+            keyboardDisplayRequiresUserAction={true}
+            onNavigationStateChange={(event) => {
+              setCurrentUrl(event.url);
+            }}
+            allowsBackForwardNavigationGestures={canSwipe(currentUrl)}
+          />
+        </>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
