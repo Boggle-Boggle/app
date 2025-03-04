@@ -19,7 +19,6 @@
         "light": "./assets/images/logoForIOS.png",
         "tinted": "./assets/images/logoForIOS.png"
       },
-      "appStoreIcon": "./assets/images/appStoreIcon.png",
       "supportsTablet": false,
       "bundleIdentifier": "com.bbaegok.app",
       "buildNumber": "1.0.0",
