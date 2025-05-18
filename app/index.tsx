@@ -1,7 +1,8 @@
 import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
-import { Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { View, Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+
 import WebView from 'react-native-webview';
 
 export default function App() {
@@ -84,7 +85,7 @@ export default function App() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={isKeyboardAvoidingPage()}>
       <TouchableWithoutFeedback onPressIn={dismissKeyboard}>
-        <>
+        <View style={{ flex: 1 }}>
           <StatusBar style='dark' />
           <WebView
             userAgent='Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'
@@ -103,7 +104,7 @@ export default function App() {
             }}
             allowsBackForwardNavigationGestures={canSwipe(currentUrl)}
           />
-        </>
+        </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
