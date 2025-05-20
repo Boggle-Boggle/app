@@ -90,6 +90,10 @@ export default function App() {
     return undefined;
   };
 
+  const shouldOpenExternally = (url: string): boolean => {
+    return !url.startsWith('http') && !url.startsWith('https');
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior={isKeyboardAvoidingPage()}>
       <TouchableWithoutFeedback onPressIn={dismissKeyboard}>
@@ -112,29 +116,19 @@ export default function App() {
             }}
             allowsBackForwardNavigationGestures={canSwipe(currentUrl)}
             originWhitelist={['http', 'https', 'kakaotalk']}
-            // onShouldStartLoadWithRequest={async (event) => {
-            //   const url = event.url;
+            onShouldStartLoadWithRequest={(event) => {
+              const url = event.url;
 
-            //   // 1. 일반 웹 URL은 허용
-            //   if (url.startsWith('http') || url.startsWith('https')) {
-            //     return true;
-            //   }
+              if (shouldOpenExternally(url)) {
+                Linking.openURL(url).catch((err) => {
+                  console.warn('외부 URL 열기 실패:', err);
+                });
 
-            //   // 2. 외부 앱 열기 시도 (예: kakaotalk:// 등)
-            //   try {
-            //     const supported = await Linking.canOpenURL(url);
-            //     if (supported) {
-            //       await Linking.openURL(url);
-            //     } else {
-            //       alert(`Can't open URL: ${url}`);
-            //     }
-            //   } catch (error) {
-            //     console.error('URL 열기 실패:', error);
-            //     alert('앱을 열 수 없습니다.');
-            //   }
+                return false;
+              }
 
-            //   return false; // WebView에선 로딩 안 함
-            // }}
+              return true;
+            }}
           />
         </View>
       </TouchableWithoutFeedback>
