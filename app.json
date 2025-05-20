@@ -2,7 +2,7 @@
   "expo": {
     "name": "빼곡",
     "slug": "app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/logoForIOS.png",
     "scheme": "bbaegok",
@@ -21,10 +21,11 @@
       },
       "supportsTablet": false,
       "bundleIdentifier": "com.bbaegok.app",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "NSPushNotificationsUsageDescription": "매주 읽은 책을 기록할 수 있도록 알림을 보내드립니다."
+        "NSPushNotificationsUsageDescription": "매주 읽은 책을 기록할 수 있도록 알림을 보내드립니다.",
+        "LSApplicationQueriesSchemes": ["kakaotalk", "kakaolink", "naversearchapp", "instagram"]
       }
     },
     "android": {

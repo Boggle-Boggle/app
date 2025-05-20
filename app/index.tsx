@@ -1,7 +1,15 @@
 import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Keyboard,
+  StyleSheet,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Linking,
+  Platform,
+} from 'react-native';
 
 import WebView from 'react-native-webview';
 
@@ -90,7 +98,7 @@ export default function App() {
           <WebView
             userAgent='Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'
             ref={webViewRef}
-            source={{ uri: 'https://bbaegok.store' }}
+            source={{ uri: 'https://bbaegok.store', headers: { 'Cache-Control': 'no-cache' } }}
             style={[styles.webView]}
             bounces={false}
             scrollEnabled={!keyboardVisible}
@@ -103,6 +111,30 @@ export default function App() {
               setCurrentUrl(event.url);
             }}
             allowsBackForwardNavigationGestures={canSwipe(currentUrl)}
+            originWhitelist={['http', 'https', 'kakaotalk']}
+            onShouldStartLoadWithRequest={async (event) => {
+              const url = event.url;
+
+              // 1. 일반 웹 URL은 허용
+              if (url.startsWith('http') || url.startsWith('https')) {
+                return true;
+              }
+
+              // 2. 외부 앱 열기 시도 (예: kakaotalk:// 등)
+              try {
+                const supported = await Linking.canOpenURL(url);
+                if (supported) {
+                  await Linking.openURL(url);
+                } else {
+                  alert(`Can't open URL: ${url}`);
+                }
+              } catch (error) {
+                console.error('URL 열기 실패:', error);
+                alert('앱을 열 수 없습니다.');
+              }
+
+              return false; // WebView에선 로딩 안 함
+            }}
           />
         </View>
       </TouchableWithoutFeedback>
