@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, Alert, View, StatusBar } from 'react-native';
+import { BackHandler, Alert, View, StatusBar, Linking } from 'react-native';
 import WebView from 'react-native-webview';
 
 export default function App() {
@@ -44,6 +44,10 @@ export default function App() {
     return () => backHandler.remove();
   }, [canGoBack]);
 
+  const shouldOpenExternally = (url: string): boolean => {
+    return !url.startsWith('http') && !url.startsWith('https');
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={getStatusColor()} barStyle='dark-content' />
@@ -56,6 +60,20 @@ export default function App() {
         onNavigationStateChange={(navState) => {
           setCanGoBack(navState.canGoBack);
           setCurrentUrl(navState.url);
+        }}
+        originWhitelist={['http', 'https', 'kakaotalk']}
+        onShouldStartLoadWithRequest={(event) => {
+          const url = event.url;
+
+          if (shouldOpenExternally(url)) {
+            Linking.openURL(url).catch((err) => {
+              console.warn('외부 URL 열기 실패:', err);
+            });
+
+            return false;
+          }
+
+          return true;
         }}
       />
     </View>
