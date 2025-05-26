@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFonts } from 'expo-font';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { Stack } from 'expo-router';
 import * as Network from 'expo-network';
 import * as SplashScreen from 'expo-splash-screen';
@@ -13,11 +11,6 @@ export { ErrorBoundary } from 'expo-router';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
-
   const [isNetworkAvailable, setIsNetworkAvailable] = useState(true);
 
   // 네트워크 상태 체크
@@ -36,18 +29,10 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded && isNetworkAvailable) {
+    if (isNetworkAvailable) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, isNetworkAvailable]);
-
-  if (!loaded) {
-    return null;
-  }
+  }, [isNetworkAvailable]);
 
   if (!isNetworkAvailable) {
     return (
