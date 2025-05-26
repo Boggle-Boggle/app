@@ -29,16 +29,18 @@
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logofore.png",
-        "backgroundColor": "#EEEDEB"
-      },
-      "package": "bbaegok.app"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/logoForIOS.png"
+      "package": "bbaegok.app",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "kakaotalk"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "plugins": ["expo-router"],
     "experiments": {
