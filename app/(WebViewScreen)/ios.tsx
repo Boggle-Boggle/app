@@ -1,4 +1,4 @@
-import * as Notifications from 'expo-notifications';
+// import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
 import { Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
@@ -19,39 +19,39 @@ export default function WebViewScreenIos() {
     };
   }, []);
 
-  async function registerForPushNotificationsAsync() {
-    const { status } = await Notifications.getPermissionsAsync();
-    if (status !== 'granted') {
-      const { status: newStatus } = await Notifications.requestPermissionsAsync();
-      if (newStatus !== 'granted') {
-        console.log('푸시 알림 권한이 거부됨');
-        return;
-      }
-    }
-  }
+  // async function registerForPushNotificationsAsync() {
+  //   const { status } = await Notifications.getPermissionsAsync();
+  //   if (status !== 'granted') {
+  //     const { status: newStatus } = await Notifications.requestPermissionsAsync();
+  //     if (newStatus !== 'granted') {
+  //       console.log('푸시 알림 권한이 거부됨');
+  //       return;
+  //     }
+  //   }
+  // }
 
-  useEffect(() => {
-    registerForPushNotificationsAsync();
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync();
 
-    // 1초마다 현재 시간을 확인
-    const interval = setInterval(() => {
-      const now = new Date();
-      const isSunday = now.getDay() === 0;
-      const hour = now.getHours();
-      const minute = now.getMinutes();
+  //   // 1초마다 현재 시간을 확인
+  //   const interval = setInterval(() => {
+  //     const now = new Date();
+  //     const isSunday = now.getDay() === 0;
+  //     const hour = now.getHours();
+  //     const minute = now.getMinutes();
 
-      if (isSunday && hour === 18 && minute === 0)
-        Notifications.scheduleNotificationAsync({
-          content: {
-            title: '한 주의 마무리는 빼곡과 함께!📚',
-            body: `이번 주, 어떤 책을 읽었나요? 책장에 새로운 책을 추가해보세요✏️`,
-          },
-          trigger: null,
-        });
-    }, 60000);
+  //     if (isSunday && hour === 18 && minute === 0)
+  //       Notifications.scheduleNotificationAsync({
+  //         content: {
+  //           title: '한 주의 마무리는 빼곡과 함께!📚',
+  //           body: `이번 주, 어떤 책을 읽었나요? 책장에 새로운 책을 추가해보세요✏️`,
+  //         },
+  //         trigger: null,
+  //       });
+  //   }, 60000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
