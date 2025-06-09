@@ -2,25 +2,33 @@
   "expo": {
     "name": "빼곡",
     "slug": "app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
-    "scheme": "빼곡",
+    "icon": "./assets/images/logoForIOS.png",
+    "scheme": "bbaegok",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/logo.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#EEEDEB"
     },
     "ios": {
-      "supportsTablet": true
+      "icon": {
+        "dark": "./assets/images/logoForIOS.png",
+        "light": "./assets/images/logoForIOS.png",
+        "tinted": "./assets/images/logoForIOS.png"
+      },
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bbaegok.app",
+      "buildNumber": "1.0.1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPushNotificationsUsageDescription": "매주 읽은 책을 기록할 수 있도록 알림을 보내드립니다.",
+        "LSApplicationQueriesSchemes": ["kakaotalk", "kakaolink", "naversearchapp", "instagram"]
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logofore.png",
-        "backgroundColor": "#EEEDEB"
-      },
       "package": "bbaegok.app",
       "intentFilters": [
         {
@@ -33,11 +41,6 @@
           "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/logo.png"
     },
     "plugins": ["expo-router"],
     "experiments": {
