@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, Alert, View, StatusBar } from 'react-native';
-import WebView from 'react-native-webview';
+import { Platform } from 'react-native';
+import WebViewScreenAndroid from './(WebViewScreen)/android';
+import WebViewScreenIos from './(WebViewScreen)/ios';
 
 export default function App() {
   if (Platform.OS === 'ios') return <WebViewScreenIos />;
