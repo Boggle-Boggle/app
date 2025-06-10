@@ -3,7 +3,7 @@ module.exports = ({ config }) => {
     expo: {
       name: '빼곡',
       slug: 'app',
-      version: '1.0.1',
+      version: '1.0.2',
       orientation: 'portrait',
       icon: './assets/images/logoForIOS.png',
       scheme: 'bbaegok',
