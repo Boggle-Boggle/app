@@ -3,11 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
 import { Keyboard, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
 import WebView from 'react-native-webview';
+import Constants from 'expo-constants';
 
 export default function WebViewScreenIos() {
   const webViewRef = useRef<WebView>(null);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
+
+  const webviewUrl = Constants.expoConfig?.extra?.webviewUrl;
 
   useEffect(() => {
     const showListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
@@ -58,7 +61,7 @@ export default function WebViewScreenIos() {
   };
 
   const canSwipe = (url: string) => {
-    const baseDomain = 'https://bbaegok.store';
+    const baseDomain = webviewUrl;
 
     const noSwipePatterns = [
       baseDomain + '/$',
@@ -89,7 +92,7 @@ export default function WebViewScreenIos() {
           <WebView
             userAgent='Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'
             ref={webViewRef}
-            source={{ uri: 'https://bbaegok.store' }}
+            source={{ uri: webviewUrl }}
             style={[styles.webView]}
             bounces={false}
             scrollEnabled={!keyboardVisible}

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, Alert, View, StatusBar, Linking } from 'react-native';
 import WebView from 'react-native-webview';
+import Constants from 'expo-constants';
 
 export default function WebViewScreenAndroid() {
   const webViewRef = useRef<WebView>(null);
   const [canGoBack, setCanGoBack] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string>('#FFFFFF');
+
+  const webviewUrl = Constants.expoConfig?.extra?.webviewUrl;
+
   const getStatusColor = () => {
     if (currentUrl.includes('login')) return '#CBBAB9';
     if (currentUrl.includes('note')) return '#DCD7D6';
@@ -54,7 +58,7 @@ export default function WebViewScreenAndroid() {
       <WebView
         ref={webViewRef}
         userAgent='Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Mobile Safari/537.36'
-        source={{ uri: 'https://bbaegok.store' }}
+        source={{ uri: webviewUrl }}
         style={{ flex: 1 }}
         overScrollMode='never'
         onNavigationStateChange={(navState) => {
