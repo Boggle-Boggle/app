@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "build:and": "eas build --platform android",
-    "build:ios": "eas build --platform ios",
+    "build:and": "eas build --platform android --profile production",
+    "build:ios": "eas build --platform ios --profile production",
     "submit:and": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
     "test": "jest --watchAll"
