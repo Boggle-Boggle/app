@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, Alert, View, StatusBar, Linking } from 'react-native';
 import WebView from 'react-native-webview';
 import Constants from 'expo-constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function WebViewScreenAndroid() {
   const webViewRef = useRef<WebView>(null);
@@ -53,13 +54,13 @@ export default function WebViewScreenAndroid() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <StatusBar backgroundColor={getStatusColor()} barStyle='dark-content' />
       <WebView
         ref={webViewRef}
         userAgent='Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Mobile Safari/537.36'
         source={{ uri: webviewUrl }}
-        style={{ flex: 1 }}
+        style={{ flex: 1, backgroundColor: 'white' }}
         overScrollMode='never'
         onNavigationStateChange={(navState) => {
           setCanGoBack(navState.canGoBack);
@@ -80,6 +81,6 @@ export default function WebViewScreenAndroid() {
           return true;
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 }
